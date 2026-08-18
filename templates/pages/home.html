@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ home.seo_title|default:default_seo_title }}{% endblock %}
+{% block meta_description %}{{ home.seo_description|default:default_seo_description }}{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="container hero">
+  <div data-reveal>
+    {% if home.hero_eyebrow %}<div class="eyebrow mb-2">{{ home.hero_eyebrow }}</div>{% endif %}
+    <h1 class="hero-title">{{ home.hero_headline }}</h1>
+    {% if home.hero_subheadline %}
+      <p class="text-lg text-muted max-width-sm mt-3">{{ home.hero_subheadline }}</p>
+    {% endif %}
+    <div class="hero-actions">
+      <a href="{{ home.hero_primary_cta_url }}" class="btn btn-primary">{{ home.hero_primary_cta_label }}</a>
+      {% if home.hero_secondary_cta_label %}
+        <a href="{{ home.hero_secondary_cta_url }}" class="btn btn-secondary">{{ home.hero_secondary_cta_label }}</a>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if home.hero_video %}
+    <video class="hero-media" src="{{ home.hero_video.url }}" autoplay muted loop playsinline data-reveal></video>
+  {% elif home.hero_image %}
+    <img class="hero-media" src="{{ home.hero_image.url }}" alt="{{ home.hero_headline }}" data-reveal>
+  {% endif %}
+
+  <div class="hero-divider">
+    {% include "components/trace_divider.html" %}
+  </div>
+</section>
+
+<!-- STATISTICS -->
+{% if home.show_statistics and statistics %}
+<section class="container section" style="padding-top: 0;">
+  <div class="grid grid-4">
+    {% for stat in statistics %}
+      {% include "components/stat_card.html" with value=stat.value label=stat.label %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-- CAPABILITIES -->
+{% if home.show_capabilities %}
+<section class="container section section--bordered">
+  <div data-reveal class="max-width-sm">
+    <h2 class="section-title">{{ home.capabilities_heading }}</h2>
+    {% if home.capabilities_intro %}<p class="text-muted mt-2">{{ home.capabilities_intro }}</p>{% endif %}
+  </div>
+  {% if services %}
+  <div class="grid grid-3 mt-6">
+    {% for service in services %}
+      {% include "components/service_card.html" with service=service %}
+    {% endfor %}
+  </div>
+  <div class="mt-4"><a href="{% url 'services:index' %}" class="btn btn-secondary">View All Services</a></div>
+  {% else %}
+  <div class="card mt-6"><span class="empty-note">No featured services yet — add some in Django Admin.</span></div>
+  {% endif %}
+</section>
+{% endif %}
+
+<!-- INDUSTRIES -->
+{% if home.show_industries %}
+<section class="container section section--bordered">
+  <div data-reveal>
+    <h2 class="section-title">{{ home.industries_heading }}</h2>
+    {% if home.industries_intro %}<p class="text-muted max-width-sm mt-2">{{ home.industries_intro }}</p>{% endif %}
+  </div>
+  {% if industries %}
+  <div class="grid grid-4 mt-6">
+    {% for industry in industries %}
+      {% include "components/industry_card.html" with industry=industry %}
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="card mt-6"><span class="empty-note">No industries added yet — add some in Django Admin.</span></div>
+  {% endif %}
+</section>
+{% endif %}
+
+<!-- FEATURED PROJECTS -->
+{% if home.show_projects %}
+<section class="container section section--bordered">
+  <div data-reveal class="section-head">
+    <div class="max-width-sm">
+      <h2 class="section-title">{{ home.projects_heading }}</h2>
+      {% if home.projects_intro %}<p class="text-muted mt-2">{{ home.projects_intro }}</p>{% endif %}
+    </div>
+    <a href="{% url 'projects:index' %}" class="btn btn-secondary header-cta">View All Work</a>
+  </div>
+  {% if projects %}
+  <div class="grid grid-3 grid-gap-lg mt-6">
+    {% for project in projects %}
+      {% include "components/project_card.html" with project=project %}
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="card mt-6"><span class="empty-note">No featured projects yet — add some in Django Admin.</span></div>
+  {% endif %}
+</section>
+{% endif %}
+
+<!-- RESEARCH HIGHLIGHTS -->
+{% if home.show_research and research_items %}
+<section class="container section section--bordered">
+  <div data-reveal>
+    <h2 class="section-title">{{ home.research_heading }}</h2>
+    {% if home.research_intro %}<p class="text-muted max-width-sm mt-2">{{ home.research_intro }}</p>{% endif %}
+  </div>
+  <div class="grid grid-2 mt-6">
+    {% for item in research_items %}
+      {% include "components/research_card.html" with item=item %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-- ENGINEERING PROCESS (the one legitimately-numbered sequence) -->
+{% if home.show_process and process_steps %}
+<section class="container section section--bordered">
+  <div data-reveal class="max-width-sm">
+    <h2 class="section-title">{{ home.process_heading }}</h2>
+    {% if home.process_intro %}<p class="text-muted mt-2">{{ home.process_intro }}</p>{% endif %}
+  </div>
+  <ol class="grid grid-4 mt-6 process-list">
+    {% for step in process_steps %}
+      <li data-reveal>
+        <div class="process-step__number">{{ step.step_number|stringformat:"02d" }}</div>
+        <div class="process-step__title">{{ step.title }}</div>
+        {% if step.description %}<p class="process-step__desc">{{ step.description }}</p>{% endif %}
+      </li>
+    {% endfor %}
+  </ol>
+</section>
+{% endif %}
+
+<!-- TRAINING PROMO -->
+{% if home.show_training %}
+<section class="container section section--bordered">
+  <div class="card section-head" data-reveal>
+    <div>
+      <h2 class="section-title" style="font-size: 1.375rem;">{{ home.training_heading }}</h2>
+      {% if home.training_intro %}<p class="text-muted max-width-sm mt-2">{{ home.training_intro }}</p>{% endif %}
+    </div>
+    <a href="{% url 'training:index' %}" class="btn btn-primary">Explore Training</a>
+  </div>
+</section>
+{% endif %}
+
+<!-- TESTIMONIALS / TRUSTED BY -->
+{% if home.show_testimonials and clients %}
+<section class="container section section--bordered">
+  <h2 class="section-title" data-reveal>{{ home.testimonials_heading }}</h2>
+  <div class="client-logos mt-6">
+    {% for t in clients %}
+      {% if t.client.logo %}<img src="{{ t.client.logo.url }}" alt="{{ t.client.name }}" data-reveal>{% endif %}
+    {% endfor %}
+  </div>
+  {% if featured_testimonial %}
+  <blockquote class="testimonial-quote" data-reveal>
+    <p>&ldquo;{{ featured_testimonial.quote }}&rdquo;</p>
+    <footer>
+      {% if featured_testimonial.photo %}<img src="{{ featured_testimonial.photo.url }}" alt="{{ featured_testimonial.author_name }}" class="testimonial-photo">{% endif %}
+      {{ featured_testimonial.author_name }}{% if featured_testimonial.author_role %}, {{ featured_testimonial.author_role }}{% endif %}
+      {% if featured_testimonial.client %} — {{ featured_testimonial.client.name }}{% endif %}
+    </footer>
+  </blockquote>
+  {% endif %}
+</section>
+{% endif %}
+
+<!-- LATEST NEWS -->
+{% if home.show_news and news_posts %}
+<section class="container section section--bordered">
+  <div class="section-head" data-reveal>
+    <h2 class="section-title">Latest News</h2>
+    <a href="{% url 'blog:index' %}" class="btn btn-secondary header-cta">View All Posts</a>
+  </div>
+  <div class="grid grid-3 grid-gap-lg mt-6">
+    {% for post in news_posts %}
+      {% include "components/post_card.html" with post=post %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-- CLOSING CTA -->
+<section class="container section-lg section--bordered text-center" data-reveal>
+  <h2 class="section-title">{{ home.cta_heading }}</h2>
+  {% if home.cta_body %}<p class="text-muted max-width-sm mt-2" style="margin-left:auto;margin-right:auto;">{{ home.cta_body }}</p>{% endif %}
+  <a href="{{ home.cta_button_url }}" class="btn btn-primary mt-4">{{ home.cta_button_label }}</a>
+</section>
+
+{% endblock %}

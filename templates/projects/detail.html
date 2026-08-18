@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ project.seo_title|default:project.title }} — {{ site_config.short_name }}{% endblock %}
+{% block content %}
+<section class="container section max-width-md">
+  {% if project.industry %}<div class="eyebrow mb-2" data-reveal>{{ project.industry.name }}</div>{% endif %}
+  <h1 class="page-title" data-reveal>{{ project.title }}</h1>
+  <p class="text-lg text-muted mt-3" data-reveal>{{ project.summary }}</p>
+  {% if project.display_client_name %}<p class="mono mt-2" style="color: var(--emec-circuit);" data-reveal>Client: {{ project.display_client_name }}</p>{% endif %}
+  {% if project.cover_image %}<img src="{{ project.cover_image.url }}" alt="{{ project.title }}" class="detail-hero-image">{% endif %}
+  <p class="phase-note" data-reveal>Full case-study build (problem statement, challenges, gallery, downloads) lands in Phase 7.</p>
+  <a href="{% url 'projects:index' %}" class="btn btn-secondary mt-4">← All Work</a>
+</section>
+{% endblock %}

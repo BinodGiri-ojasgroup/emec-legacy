@@ -1,0 +1,11 @@
+{% comment %}Usage: {% include "components/industry_card.html" with industry=industry %}{% endcomment %}
+<a href="{{ industry.get_absolute_url }}" class="card-link" data-reveal>
+  <div class="card card-center">
+    {% if industry.image %}
+      <div class="card-media card-media--square mb-1">
+        <img src="{{ industry.image.url }}" alt="{{ industry.name }}">
+      </div>
+    {% endif %}
+    <div class="card-title">{{ industry.name }}</div>
+  </div>
+</a>

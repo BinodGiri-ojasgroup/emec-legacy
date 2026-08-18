@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{ post.seo_title|default:post.title }} — {{ site_config.short_name }}{% endblock %}
+{% block content %}
+<section class="container section max-width-md">
+  {% if post.category %}<div class="eyebrow mb-2" data-reveal>{{ post.category.name }}</div>{% endif %}
+  <h1 class="page-title" data-reveal>{{ post.title }}</h1>
+  <p class="text-lg text-muted mt-3" data-reveal>{{ post.excerpt }}</p>
+  {% if post.featured_image %}<img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="detail-hero-image">{% endif %}
+  <p class="phase-note" data-reveal>Full post body/rich-text build lands in Phase 12.</p>
+  <a href="{% url 'blog:index' %}" class="btn btn-secondary mt-4">← All News</a>
+</section>
+{% endblock %}

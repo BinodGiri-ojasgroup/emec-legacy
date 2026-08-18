@@ -1,0 +1,11 @@
+{% comment %}Usage: {% include "components/project_card.html" with project=project %}{% endcomment %}
+<a href="{{ project.get_absolute_url }}" class="card-link" data-reveal>
+  <div class="card-media">
+    {% if project.cover_image %}
+      <img src="{{ project.cover_image.url }}" alt="{{ project.title }}">
+    {% endif %}
+  </div>
+  {% if project.industry %}<div class="eyebrow mt-2">{{ project.industry.name }}</div>{% endif %}
+  <div class="card-title mt-1">{{ project.title }}</div>
+  <p class="text-muted mt-1">{{ project.summary }}</p>
+</a>

@@ -1,0 +1,41 @@
+# ---------------------------------------------------------------------------
+# EMEC — Base requirements (installed in every environment)
+# ---------------------------------------------------------------------------
+Django==5.2.17                    # 5.0/5.1 never got official Python 3.14 support (Context.__copy__ crashes on 3.14) — 5.2 LTS is the first release that does
+psycopg[binary]==3.2.10          # PostgreSQL adapter — 3.1.x has no wheel past Python 3.13, don't downgrade this
+python-decouple==3.8             # environment variable management
+django-environ==0.11.2           # alt/complementary env parsing (DATABASE_URL etc.)
+
+# Content & admin UX
+django-mptt==0.16.0              # tree structures (nav menus, blog categories)
+django-ckeditor-5==0.2.18        # rich text editor for blog/research/pages (maintained CKEditor 5 integration)
+django-imagekit==5.0.0           # responsive image generation / thumbnails
+Pillow==11.3.0                   # image processing — 10.3.0 has no prebuilt wheels past Python 3.12, avoid it
+django-taggit==6.1.0             # tagging for blog/projects/research (5.0.3 was pulled from PyPI, don't pin it)
+
+# Forms & interactivity
+django-htmx==1.18.0
+
+# SEO / structured content
+django-meta==2.5.0
+# NOTE: XML sitemaps use Django's built-in django.contrib.sitemaps — no extra package required.
+
+# Search & filtering
+django-filter==24.2
+django-watson==1.6.3             # lightweight full text search (swappable for Postgres FTS/Elastic later)
+
+# Media / file handling
+django-storages==1.14.3          # S3/Azure/GCS-ready storage backend (local in dev)
+django-cleanup==8.1.0            # auto-delete orphaned media files
+
+# Security & hardening
+django-csp==3.8
+django-axes==6.5.2               # login attempt throttling / audit trail
+
+# Performance
+django-redis==5.4.0
+whitenoise==6.6.0                # static file serving in prod (works with/without CDN)
+
+# Utilities
+django-extensions==3.2.3
+django-model-utils==4.5.1

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Services — {{ site_config.short_name }}{% endblock %}
+{% block meta_description %}Engineering consulting, R&D, product design, embedded systems, automation, and AI services from {{ site_config.short_name }}.{% endblock %}
+{% block content %}
+<section class="container section">
+  <div class="eyebrow mb-2" data-reveal>Engineering Capabilities</div>
+  <h1 class="page-title max-width-sm" data-reveal>Consulting, R&amp;D, and delivery under one engineering roof.</h1>
+  <div class="grid grid-3 mt-6">
+    {% for service in services %}
+      {% include "components/service_card.html" with service=service %}
+    {% empty %}
+      <p class="empty-note">No services published yet.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

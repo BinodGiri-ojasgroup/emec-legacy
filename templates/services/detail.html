@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}{{ service.seo_title|default:service.title }} — {{ site_config.short_name }}{% endblock %}
+{% block meta_description %}{{ service.seo_description|default:service.summary }}{% endblock %}
+
+{% block content %}
+<section class="container section">
+  <div class="max-width-md" data-reveal>
+    {% if service.category %}<div class="eyebrow mb-2">{{ service.category.name }}</div>{% endif %}
+    <h1 class="page-title">{{ service.title }}</h1>
+    <p class="text-lg text-muted mt-3">{{ service.summary }}</p>
+  </div>
+
+  {% if service.hero_image %}
+    <img src="{{ service.hero_image.url }}" alt="{{ service.title }}" class="detail-hero-image" data-reveal>
+  {% endif %}
+
+  <div class="detail-layout">
+    <div data-reveal>
+      {% if service.description %}
+        <div class="prose-content">{{ service.description }}</div>
+      {% endif %}
+
+      {% if service.process_steps.all %}
+        <h2 class="section-title mt-8 mb-4" style="font-size: 1.25rem;">How We Deliver This</h2>
+        <div class="step-list">
+          {% for step in service.process_steps.all %}
+            <div class="step-row">
+              <div class="step-row__number">{{ step.step_number|stringformat:"02d" }}</div>
+              <div>
+                <div class="step-row__title">{{ step.title }}</div>
+                {% if step.description %}<p class="step-row__desc">{{ step.description }}</p>{% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <aside data-reveal>
+      {% if service.related_industries.all %}
+        <div class="card">
+          <div class="eyebrow mb-2">Relevant Industries</div>
+          <div class="sidebar-list">
+            {% for industry in service.related_industries.all %}
+              <a href="{{ industry.get_absolute_url }}">{{ industry.name }}</a>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+      <a href="{% url 'contact:index' %}" class="btn btn-primary btn-block mt-3">Discuss This Service</a>
+    </aside>
+  </div>
+
+  <a href="{% url 'services:index' %}" class="btn btn-secondary mt-8">← All Services</a>
+</section>
+{% endblock %}

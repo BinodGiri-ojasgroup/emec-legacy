@@ -1,0 +1,12 @@
+{% comment %}
+Signature EMEC element — a schematic circuit trace used as a section
+divider throughout the site (see docs/DESIGN_SYSTEM.md). `data-trace`
+is picked up by static/js/site.js to animate the stroke drawing in
+left-to-right when the divider scrolls into view.
+{% endcomment %}
+<svg class="trace-divider" data-trace viewBox="0 0 1200 24" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M0 12 H360 V4 H520 V20 H760 V12 H1200" stroke-width="1.5" vector-effect="non-scaling-stroke" />
+  <circle cx="360" cy="12" r="3" fill="var(--emec-circuit)" />
+  <circle cx="520" cy="4" r="3" fill="var(--emec-circuit)" />
+  <circle cx="760" cy="20" r="3" fill="var(--emec-circuit)" />
+</svg>

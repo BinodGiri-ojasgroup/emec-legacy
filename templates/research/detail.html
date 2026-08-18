@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{ item.title }} — {{ site_config.short_name }}{% endblock %}
+{% block content %}
+<section class="container section max-width-md">
+  {% if item.category %}<div class="eyebrow mb-2" data-reveal>{{ item.category.name }}</div>{% endif %}
+  <h1 class="page-title" data-reveal>{{ item.title }}</h1>
+  <p class="text-lg text-muted mt-3" data-reveal>{{ item.abstract }}</p>
+  {% if item.cover_image %}<img src="{{ item.cover_image.url }}" alt="{{ item.title }}" class="detail-hero-image">{% endif %}
+  <p class="phase-note" data-reveal>Full research build (authors, PDF downloads, patents) lands in Phase 8.</p>
+  <a href="{% url 'research:index' %}" class="btn btn-secondary mt-4">← All Research</a>
+</section>
+{% endblock %}

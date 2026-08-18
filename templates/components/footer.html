@@ -1,0 +1,46 @@
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand">{{ site_config.short_name|default:"EMEC" }}</div>
+      <p class="footer-about">{{ site_config.footer_about_text|default:site_config.tagline }}</p>
+      <div class="eyebrow mt-3">EST. {{ site_config.founding_year_bs }} B.S. / {{ site_config.founding_year_ad }} A.D.</div>
+    </div>
+
+    <div class="footer-col">
+      <div class="eyebrow footer-col-title">Company</div>
+      <ul>
+        {% for item in nav_footer_col_1 %}
+          <li><a href="{{ item.url }}">{{ item.label }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <div class="eyebrow footer-col-title">Engineering</div>
+      <ul>
+        {% for item in nav_footer_col_2 %}
+          <li><a href="{{ item.url }}">{{ item.label }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <div class="eyebrow footer-col-title">Contact</div>
+      <ul>
+        <li class="footer-contact"><a href="mailto:{{ site_config.primary_email }}">{{ site_config.primary_email }}</a></li>
+        <li class="footer-contact">{{ site_config.primary_phone }}</li>
+      </ul>
+    </div>
+  </div>
+
+  {% include "components/trace_divider.html" %}
+
+  <div class="container footer-bottom">
+    <span>{{ site_config.footer_copyright_text|default:"© EMEC — Electro Mnemonic Engineering Consultancy" }}</span>
+    <div class="footer-bottom-links">
+      {% for item in nav_footer_legal %}
+        <a href="{{ item.url }}">{{ item.label }}</a>
+      {% endfor %}
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,5 @@
+-r base.txt
+
+gunicorn==22.0.0
+sentry-sdk==2.6.0
+django-anymail==11.0.1            # transactional email (SES/SendGrid/Mailgun)

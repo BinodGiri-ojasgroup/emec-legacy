@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Site Maintenance — {{ site_config.short_name }}{% endblock %}
+{% block robots %}noindex, nofollow{% endblock %}
+
+{% block content %}
+<section class="container simple-page">
+  <div class="eyebrow mb-2">Scheduled Maintenance</div>
+  <h1 class="page-title">We'll be right back.</h1>
+  <p class="text-muted">
+    EMEC's website is undergoing scheduled maintenance. Please check back shortly,
+    or reach us directly at <a href="mailto:{{ site_config.primary_email }}" style="color: var(--emec-circuit);">{{ site_config.primary_email }}</a>.
+  </p>
+</section>
+{% endblock %}

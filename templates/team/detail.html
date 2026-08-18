@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ member.name }} — {{ site_config.short_name }}{% endblock %}
+{% block content %}
+<section class="container section max-width-md">
+  <div class="team-detail-layout">
+    {% if member.photo %}
+      <img src="{{ member.photo.url }}" alt="{{ member.name }}" class="team-detail-photo" data-reveal>
+    {% endif %}
+    <div data-reveal>
+      <h1 class="page-title">{{ member.name }}</h1>
+      <div class="team-role team-role--accent">{{ member.role_title }}</div>
+      {% if member.department %}<div class="text-muted mt-1">{{ member.department.name }}</div>{% endif %}
+      {% if member.bio %}<p class="text-muted mt-3" style="line-height:1.7;">{{ member.bio }}</p>{% endif %}
+      <div class="team-links">
+        {% if member.email %}<a href="mailto:{{ member.email }}">{{ member.email }}</a>{% endif %}
+        {% if member.linkedin_url %}<a href="{{ member.linkedin_url }}">LinkedIn</a>{% endif %}
+      </div>
+    </div>
+  </div>
+  <a href="{% url 'team:index' %}" class="btn btn-secondary mt-8">← All Leadership</a>
+</section>
+{% endblock %}

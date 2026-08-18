@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Research — {{ site_config.short_name }}{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1 class="page-title" data-reveal>Research &amp; Innovation</h1>
+  <div class="grid grid-2 mt-6">
+    {% for item in items %}
+      {% include "components/research_card.html" with item=item %}
+    {% empty %}
+      <p class="empty-note">No research items published yet.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

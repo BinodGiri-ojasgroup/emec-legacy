@@ -1,0 +1,8 @@
+<div class="announcement-bar">
+  <div class="container">
+    <span>{{ active_announcement.message }}</span>
+    {% if active_announcement.link_url %}
+      <a href="{{ active_announcement.link_url }}">{{ active_announcement.link_label|default:"Learn more" }}</a>
+    {% endif %}
+  </div>
+</div>

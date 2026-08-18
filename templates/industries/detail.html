@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ industry.name }} — {{ site_config.short_name }}{% endblock %}
+{% block content %}
+<section class="container section max-width-md">
+  <h1 class="page-title" data-reveal>{{ industry.name }}</h1>
+  {% if industry.summary %}<p class="text-lg text-muted mt-3" data-reveal>{{ industry.summary }}</p>{% endif %}
+  {% if industry.image %}<img src="{{ industry.image.url }}" alt="{{ industry.name }}" class="detail-hero-image">{% endif %}
+  <p class="phase-note" data-reveal>Related services/projects build lands in Phase 6.</p>
+  <a href="{% url 'industries:index' %}" class="btn btn-secondary mt-4">← All Industries</a>
+</section>
+{% endblock %}

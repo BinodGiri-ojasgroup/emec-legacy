@@ -1,0 +1,16 @@
+{% comment %}Usage: {% include "components/research_card.html" with item=item %}{% endcomment %}
+<a href="{{ item.get_absolute_url }}" class="card-link" data-reveal>
+  {% if item.cover_image %}
+    <div class="card-media card-media--wide mb-2">
+      <img src="{{ item.cover_image.url }}" alt="{{ item.title }}">
+    </div>
+  {% endif %}
+  <div class="card">
+    <div class="section-head">
+      {% if item.category %}<div class="eyebrow">{{ item.category.name }}</div>{% endif %}
+      {% if item.publication_date %}<div class="mono text-muted" style="font-size: 0.75rem;">{{ item.publication_date|date:"M Y" }}</div>{% endif %}
+    </div>
+    <div class="card-title mt-2">{{ item.title }}</div>
+    <p class="text-muted mt-1">{{ item.abstract }}</p>
+  </div>
+</a>

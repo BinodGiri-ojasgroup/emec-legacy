@@ -1,0 +1,33 @@
+{% extends "admin/base_site.html" %}
+{% comment %}
+Minimal brand pass on Django's default admin — deliberately does NOT try to
+reskin the entire admin UI (that's a maintenance trap: every Django upgrade
+would need re-auditing against a from-scratch admin theme). Just the header
+bar and link color, so /control/ visibly belongs to EMEC without fighting
+Django's own CSS architecture.
+{% endcomment %}
+{% block extrastyle %}
+{{ block.super }}
+<style>
+  :root {
+    --primary: #0B1220;
+    --secondary: #151E2B;
+    --accent: #35C7C0;
+    --primary-fg: #F6F8FA;
+    --link-fg: #3B6EA5;
+    --link-hover-color: #35C7C0;
+    --header-color: #F6F8FA;
+    --header-bg: #0B1220;
+    --header-branding-color: #F6F8FA;
+  }
+  #header { border-bottom: 2px solid #35C7C0; }
+  .module h2, .module caption, .inline-group h2 { background: #151E2B; }
+  div.breadcrumbs { background: #151E2B; }
+</style>
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">EMEC Control Center</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

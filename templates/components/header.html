@@ -1,0 +1,36 @@
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="{% url 'pages:home' %}" class="brand">
+      {% if site_config.logo_dark %}
+        <img src="{{ site_config.logo_dark.url }}" alt="{{ site_config.site_name }}" class="brand-logo brand-logo--dark">
+        <img src="{{ site_config.logo.url }}" alt="{{ site_config.site_name }}" class="brand-logo brand-logo--light">
+      {% elif site_config.logo %}
+        <img src="{{ site_config.logo.url }}" alt="{{ site_config.site_name }}">
+      {% else %}
+        {{ site_config.short_name|default:"EMEC" }}
+      {% endif %}
+    </a>
+
+    <nav class="primary-nav" aria-label="Primary">
+      {% for item in nav_header_primary %}
+        <div class="nav-item">
+          <a href="{{ item.url|default:'#' }}">{{ item.label }}</a>
+          {% if item.children.all %}
+          <div class="nav-dropdown">
+            <div class="nav-dropdown-inner">
+              {% for child in item.children.all %}
+                <a href="{{ child.url }}">{{ child.label }}</a>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </nav>
+
+    <div class="header-actions">
+      <button type="button" data-theme-toggle aria-label="Toggle light/dark mode" class="theme-toggle">Mode</button>
+      <a href="{% url 'contact:index' %}" class="btn btn-primary header-cta">Start a Consultation</a>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,10 @@
+{% comment %}Usage: {% include "components/post_card.html" with post=post %}{% endcomment %}
+<a href="{{ post.get_absolute_url }}" class="card-link" data-reveal>
+  <div class="card-media card-media--wide">
+    {% if post.featured_image %}
+      <img src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+    {% endif %}
+  </div>
+  {% if post.category %}<div class="eyebrow mt-2">{{ post.category.name }}</div>{% endif %}
+  <div class="card-title mt-1" style="font-size: 1rem;">{{ post.title }}</div>
+</a>

@@ -1,0 +1,56 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ default_seo_title }}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}{{ default_seo_description }}{% endblock %}">
+  {% block canonical %}{% endblock %}
+  <meta name="robots" content="{% block robots %}index, follow{% endblock %}">
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="{{ site_config.site_name }}">
+  <meta property="og:title" content="{% block og_title %}{{ default_seo_title }}{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}{{ default_seo_description }}{% endblock %}">
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+  {% block og_image %}{% if site_config.default_og_image %}<meta property="og:image" content="{{ site_config.default_og_image.url }}">{% endif %}{% endblock %}
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+
+  {% block structured_data %}{% endblock %}
+
+  {% if site_config.favicon %}<link rel="icon" href="{{ site_config.favicon.url }}">{% endif %}
+
+  <!-- Fonts: Space Grotesk (display), Inter (body), IBM Plex Mono (utility/data) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Plain, hand-written CSS. No build step — edit static/css/site.css directly. -->
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+
+  {% if site_config.google_tag_manager_id %}
+  <script>/* GTM loader intentionally deferred — wired up in the SEO/analytics pass */</script>
+  {% endif %}
+
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+  {% if active_announcement %}
+    {% include "components/announcement_bar.html" %}
+  {% endif %}
+
+  {% include "components/header.html" %}
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include "components/footer.html" %}
+
+  <script src="{% static 'js/site.js' %}" defer></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

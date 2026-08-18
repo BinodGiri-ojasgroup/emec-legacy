@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}{{ about.seo_title|default:"About EMEC" }}{% endblock %}
+{% block meta_description %}{{ about.seo_description|default:default_seo_description }}{% endblock %}
+
+{% block content %}
+<section class="container section">
+  <div data-reveal class="max-width-md">
+    <div class="eyebrow mb-2">{{ site_config.founding_year_bs }} B.S. — Present</div>
+    <h1 class="page-title">{{ about.intro_heading }}</h1>
+    {% if about.story %}<p class="text-muted text-lg mt-3" style="line-height:1.7;">{{ about.story }}</p>{% endif %}
+  </div>
+  {% if about.hero_image %}
+    <img src="{{ about.hero_image.url }}" alt="{{ about.intro_heading }}" class="detail-hero-image" data-reveal>
+  {% endif %}
+</section>
+
+{% if timeline %}
+<section class="container section section--bordered">
+  <h2 class="section-title mb-2" data-reveal>History</h2>
+  <ol class="timeline mt-6">
+    {% for event in timeline %}
+      <li data-reveal>
+        <div class="timeline-year">{{ event.year_ad }}{% if event.year_bs %} · {{ event.year_bs }} B.S.{% endif %}</div>
+        <div class="timeline-title">{{ event.title }}</div>
+        {% if event.description %}<p class="timeline-desc">{{ event.description }}</p>{% endif %}
+        {% if event.image %}<img src="{{ event.image.url }}" alt="{{ event.title }}" class="timeline-image">{% endif %}
+      </li>
+    {% endfor %}
+  </ol>
+</section>
+{% endif %}
+
+{% if values %}
+<section class="container section section--bordered">
+  <h2 class="section-title mb-2" data-reveal>Values</h2>
+  <div class="grid grid-3 mt-6">
+    {% for value in values %}
+      <div class="card" data-reveal>
+        <div class="card-title">{{ value.title }}</div>
+        <p class="text-muted mt-1">{{ value.description }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if leadership %}
+<section class="container section section--bordered">
+  <div class="section-head" data-reveal>
+    <h2 class="section-title">Leadership</h2>
+    <a href="{% url 'team:index' %}" class="btn btn-secondary header-cta">Meet the Full Team</a>
+  </div>
+  <div class="grid grid-3 grid-gap-lg mt-6">
+    {% for member in leadership %}
+      <a href="{{ member.get_absolute_url }}" class="card-link" data-reveal>
+        <div class="card-media card-media--square">
+          {% if member.photo %}<img src="{{ member.photo.url }}" alt="{{ member.name }}">{% endif %}
+        </div>
+        <div class="card-title mt-2">{{ member.name }}</div>
+        <div class="team-role">{{ member.role_title }}</div>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if group_companies %}
+<section class="container section section--bordered">
+  <h2 class="section-title mb-1" data-reveal>Our Group</h2>
+  {% if about.group_story %}<p class="max-width-sm text-muted mb-2" data-reveal>{{ about.group_story }}</p>{% endif %}
+  <div class="grid grid-3 mt-6">
+    {% for company in group_companies %}
+      <div class="card" data-reveal>
+        {% if company.logo %}<img src="{{ company.logo.url }}" alt="{{ company.name }}" class="group-company-logo">{% endif %}
+        <div class="card-title">{{ company.name }}</div>
+        {% if company.tagline %}<p class="text-muted mt-1">{{ company.tagline }}</p>{% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}

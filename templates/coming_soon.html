@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section_name }} — {{ site_config.short_name }}{% endblock %}
+
+{% block content %}
+<section class="container simple-page" data-reveal>
+  <div class="eyebrow mb-2">Under Construction</div>
+  <h1 class="page-title">{{ section_name }}</h1>
+  <p class="text-muted">
+    This section of the site is being built out phase by phase. Check back soon,
+    or <a href="{% url 'contact:index' %}" style="color: var(--emec-circuit);">get in touch</a> directly.
+  </p>
+</section>
+{% endblock %}

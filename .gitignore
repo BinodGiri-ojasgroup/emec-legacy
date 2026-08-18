@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+*.sqlite3
+/staticfiles/
+/media/*
+!/media/.gitkeep
+/static/dist/*
+!/static/dist/.gitkeep
+node_modules/
+.DS_Store

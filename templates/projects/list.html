@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Projects — {{ site_config.short_name }}{% endblock %}
+{% block content %}
+<section class="container section">
+  <h1 class="page-title" data-reveal>Featured Work</h1>
+  <div class="grid grid-3 grid-gap-lg mt-6">
+    {% for project in projects %}
+      {% include "components/project_card.html" with project=project %}
+    {% empty %}
+      <p class="empty-note">No projects published yet.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
