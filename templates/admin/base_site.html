@@ -23,6 +23,25 @@ Django's own CSS architecture.
   #header { border-bottom: 2px solid #35C7C0; }
   .module h2, .module caption, .inline-group h2 { background: #151E2B; }
   div.breadcrumbs { background: #151E2B; }
+  /* Ensure save button is always visible and prominent */
+  .submit-row {
+    padding: 12px 14px;
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    margin-top: 1rem;
+  }
+  .submit-row input[type=submit] {
+    background: var(--accent) !important;
+    color: var(--primary) !important;
+    font-weight: 600 !important;
+    padding: 10px 24px !important;
+    border: none !important;
+    border-radius: 4px !important;
+    cursor: pointer;
+  }
+  .submit-row input[type=submit]:hover {
+    background: #2ab0b0 !important;
+  }
 </style>
 {% endblock %}
 
